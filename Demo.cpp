@@ -47,6 +47,24 @@ int main() {
      if (team_A.stillAlive() > 0) cout << "winner is team_A" << endl;
      else cout << "winner is team_B" << endl;
 
+     /*Point class*/
+     //print a simple distance
+     Point d(0,0), c(0,1);
+    std::cout << "Point c coordinates: ";
+    c.print();
+    std::cout << "Point d coordinates: ";
+    d.print();
+
+    // Calculate distance between two points
+    double dist = d.distance(c);
+    cout << "Distance between points c and d: " << dist << endl;
+
+    // Move point a towards point b by a distance of 1
+    Point e = c.moveTowards(c,d,1);
+    std::cout << "Point c moved towards point d: ";
+    e.print();
+    /*end Point class*/
+
      return 0; // no memory issues. Team should free the memory of its members. both a and b teams are on the stack. 
 
 }
