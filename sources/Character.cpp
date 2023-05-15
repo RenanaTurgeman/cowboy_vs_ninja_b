@@ -39,6 +39,10 @@ Point Character::getLocation() const{
     return this->location;
 }
 
+void Character::setLocation(Point other) {
+    this->location= other;
+ }
+
 /*Prints the character's name, hit points and location to the console.
  * if the character is dead not print the hit points */
 string Character::print(){

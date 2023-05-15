@@ -33,6 +33,7 @@ namespace ariel {
             std::string getName() const;
             /*Returns the character's current location.*/
             Point getLocation() const;
+            void setLocation(Point other);
             /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
 
