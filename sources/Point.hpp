@@ -15,7 +15,9 @@ namespace ariel {
         Point();
         Point(double x_coor, double y_coor);
         ~Point() = default; 
-
+        /*getters*/
+        double getX() const;
+        double getY() const;
         /*Calculates the Euclidean distance between this point and another point.
           The other point is passed as a parameter.*/
         double distance(const Point& other) const;
@@ -25,7 +27,7 @@ namespace ariel {
         
         /*The function returns the closest point to the destination point,
          * - which is at most the given distance from the source point*/
-        static Point moveTowards(Point& source, Point& destination, double distance);
+        static Point moveTowards(const Point &src, const Point &dst, double distance);
         friend std::ostream& operator<<(std::ostream& ostream, const Point& point); //TODO: check if really need (not work without)
 
     };
