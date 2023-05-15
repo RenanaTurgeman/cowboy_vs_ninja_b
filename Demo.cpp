@@ -91,6 +91,33 @@ int main() {
     std::cout << character1.print() << std::endl;
     std::cout << character2.print() << std::endl;
     /*end character class*/
+
+    /*Cowboy class*/
+    Cowboy cowboy1("John", Point(1, 1));
+    Cowboy cowboy2("Bob", Point(2, 2));
+
+    cout << cowboy1.print() << endl; // Output: C: Name: John. Hit points: 110. Location: (1, 1)
+    cout << cowboy2.print() << endl; // Output: C: Name: Bob Hit points: 110. Location: (2, 2)
+
+    try {
+        cowboy1.shoot(&cowboy2);
+        cout << "Cowboy1 shoots cowboy2!" << endl;
+        cout << "Remaining bullets: " << cowboy1.getBullet() << endl; // Output: 5
+        for (int i = 0; i <5 ; ++i) {
+            cowboy1.shoot(&cowboy2);
+        }
+        cout << "Remaining bullets: " << cowboy1.getBullet() << endl; // Output: 0
+        cout << "Bob hit points: " << cowboy2.getHitPoints() << endl; // Output: 0
+
+        cout << cowboy2.print() << endl; // Output: (Bob)
+
+        cowboy2.reload();
+        cout << "Cowboy2 reloads!" << endl;
+        cout << "Remaining bullets: " << cowboy2.getBullet() << endl; // Output: 6
+    } catch (const runtime_error& error) {
+        cout << "Error: " << error.what() << endl;
+    }
+    /*end cowboy class*/
     return 0; // no memory issues. Team should free the memory of its members. both a and b teams are on the stack.
 
 }

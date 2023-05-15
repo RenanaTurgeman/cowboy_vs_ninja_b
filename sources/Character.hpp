@@ -18,7 +18,8 @@ namespace ariel {
 
         public:
             /* Constructor for creating a new character with the given name, location, and hit points.*/
-            Character(std::string name, Point& location, int hit_point);
+            Character(std::string name, const Point& location, int hit_point);
+            Character();
             virtual ~Character() = default;
             /*getters*/
             int getHitPoints() const;

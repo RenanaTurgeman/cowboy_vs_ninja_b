@@ -4,7 +4,8 @@
 using namespace ariel;
 using namespace std;
 
-Character::Character(string name, Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
+Character::Character():name("anonymous"), location(Point()), hit_point(0) {}
+Character::Character(string name, const Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
 
 int Character::getHitPoints() const {
     return this->hit_point;
@@ -26,7 +27,7 @@ void Character::hit(int num){
     {
         throw invalid_argument("character cant hit with a negative hit points");
     }
-    this->hit_point-= num;
+    this->hit_point -= num;
 }
 
 string Character::getName() const{
