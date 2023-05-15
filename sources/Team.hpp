@@ -13,11 +13,11 @@
 namespace ariel {
     class Team{
         private:
-            std::vector<Character *> fighters; // vector to hold the fighters in the team
             Character* leader; // pointer to the team leader
         protected:
+            std::vector<Character *> fighters; // vector to hold the fighters in the team
             void chose_leader();
-            Character* chose_target();
+            Character* chose_target(Team* enemyTeam);
 
         public:
             // constructor and destructor

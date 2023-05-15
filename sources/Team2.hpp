@@ -5,6 +5,7 @@
 #include "TrainedNinja.hpp"
 #include "YoungNinja.hpp"
 #include "Cowboy.hpp"
+#include "Team.hpp"
 
 #include <iostream>
 #include <vector>
@@ -18,10 +19,10 @@ namespace ariel {
         public:
             // constructor and destructor
             Team2();
-            Team2(Character& leader);
+            Team2(Character* leader);
             ~Team2() = default;
             // member functions
-            void attack(Team2* enemyTeam) override;
+            void attack(Team* enemyTeam) override;
     };
 }
 

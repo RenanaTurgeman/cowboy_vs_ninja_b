@@ -7,21 +7,15 @@
 #include <vector>
 
 namespace ariel {
-    class SmartTeam{
+    class SmartTeam: public Team{
         private:
-            std::vector<std::unique_ptr<Character>> fighters; // vector to hold the fighters in the team
-            Character& leader; // pointer to the team leader
         public:
             // constructor and destructor
-            SmartTeam(Character& leader);
+            SmartTeam();
+            SmartTeam(Character* leader);
             ~SmartTeam() = default;
             // member functions
-            void add(Character& fighter);
-            void attack(Team* enemyTeam);
-            int stillAlive() const;
-            std::string print();
-            friend std::ostream& operator<<(std::ostream& ostream, const SmartTeam& smartTeam); //TODO: check if really need (not work without)
-
+            void attack(Team* enemyTeam) ;
     };
 }
 

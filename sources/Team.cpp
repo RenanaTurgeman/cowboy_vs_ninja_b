@@ -22,12 +22,15 @@ void Team::add(Character* fighter) {
     }
     fighters.push_back(fighter);
 }
+
 void Team::setLeader(Character* new_leader) {
     this->leader = new_leader;
 }
+
 Character* Team::getLeader() const {
     return this->leader;
 }
+
 void Team::chose_leader() {
     // search the closest fighter to the leader that alive
     Character* new_leader = nullptr;
@@ -49,7 +52,8 @@ void Team::chose_leader() {
     setLeader(new_leader);
 }
 
-Character* Team::chose_target(){
+Character* Team::chose_target(Team* enemyTeam){
+    Character* target = nullptr;
     double closestDistance = numeric_limits<double>::max();
     for (Character* enemy : enemyTeam->fighters) {
         if (enemy->isAlive()) {
@@ -75,7 +79,7 @@ void Team::attack(Team* enemyTeam) {
     if (leader) {
         // Find the closest enemy to the attacking team's leader
         Character* target = nullptr;
-        target = chose_target();
+        target = chose_target(enemyTeam);
 
         // Attack the target if it exists
         if (target) {
@@ -100,7 +104,7 @@ void Team::attack(Team* enemyTeam) {
             // Check if the target is dead and find a new target if needed
             if (!target->isAlive()) {
                 Character* newTarget = nullptr;
-                newTarget = chose_target();
+                newTarget = chose_target(enemyTeam);
                 if (newTarget) {
                     target = newTarget;
                 } else {

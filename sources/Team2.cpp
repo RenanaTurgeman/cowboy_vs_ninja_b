@@ -2,39 +2,43 @@
 using namespace ariel;
 using namespace std;
 Team2::Team2() :Team() {}
-Team2::Team2(Character& leader): Team(leader) {}
+Team2::Team2(Character* leader): Team(leader) {}
 
-void Team2::attack(Team2 *enemyTeam){
-    if (!leader) {
-        throw invalid_argument("ERROR: Leader is nullptr.");
-    }
+//void Team2::attack(Team *enemyTeam){
+//    if (!getLeader()) {
+//        throw invalid_argument("ERROR: Leader is nullptr.");
+//    }
+//
+//    if (!getLeader()->isAlive()) {
+//        chose_leader();
+//    }
+//
+//    if (getLeader()) {
+//        Character* target = chose_target();
+//
+//        if (target) {
+//            for (Character* fighter : fighters) {
+//                if (fighter->isAlive()) {
+//                    if (fighter->distance(target) < 1) {
+//                        fighter->slash(target);
+//                    } else {
+//                        fighter->move(target);
+//                    }
+//                }
+//            }
+//
+//            if (!target->isAlive()) {
+//                Character* newTarget = chose_target();
+//                if (newTarget) {
+//                    target = newTarget;
+//                } else {
+//                    return;
+//                }
+//            }
+//        }
+//    }
+//}
 
-    if (!leader->isAlive()) {
-        choose_leader();
-    }
+void Team2::attack(Team *enemyTeam){
 
-    if (leader) {
-        Character* target = choose_target();
-
-        if (target) {
-            for (Character* fighter : fighters) {
-                if (fighter->isAlive()) {
-                    if (fighter->distance(target) < 1) {
-                        fighter->slash(target);
-                    } else {
-                        fighter->move(target);
-                    }
-                }
-            }
-
-            if (!target->isAlive()) {
-                Character* newTarget = choose_target();
-                if (newTarget) {
-                    target = newTarget;
-                } else {
-                    return;
-                }
-            }
-        }
-    }
 }
