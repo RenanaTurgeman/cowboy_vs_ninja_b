@@ -20,6 +20,8 @@ namespace ariel {
             /* Constructor for creating a new character with the given name, location, and hit points.*/
             Character(std::string name, Point& location, int hit_point);
             virtual ~Character() = default;
+            /*getters*/
+            int getHitPoints() const;
             /* Returns true if the character has more than 0 hit points, and false otherwise*/
             bool isAlive() const;
             /*Calculates the distance between this character and another character.*/
@@ -30,7 +32,7 @@ namespace ariel {
             std::string getName() const;
             /*Returns the character's current location.*/
             Point getLocation() const;
-            /*Prints the character's name and location to the console.*/
+            /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
 
             friend std::ostream& operator<<(std::ostream& ostream, const Character& character); //TODO: check if really need (not work without)

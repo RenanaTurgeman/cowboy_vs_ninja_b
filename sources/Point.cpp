@@ -21,8 +21,10 @@ double Point::distance(const Point& other) const{
     return sqrt(dx*dx + dy*dy);
 }
 
-void Point::print() const{
-    std::cout << "(" << getX() << ", " << getY() << ")" << std::endl;
+string Point::print() const{
+    string msg = "";
+    msg = "(" + to_string(getX()) + ", " + to_string(getY()) + ")" ;
+    return msg;
 }
 
 // this function get 2 points and distance and return the closet point to the destination point from the source point
@@ -42,8 +44,3 @@ Point Point::moveTowards(const Point& src, const Point& dst, double dist_src)
     return Point(new_x, new_y);
 }
 
-
-std::ostream& operator<<(std::ostream& ostream, const Point& point) {
-        ostream << "(" << point.getX() << ", " << point.getY() << ")";
-        return ostream;
-    }

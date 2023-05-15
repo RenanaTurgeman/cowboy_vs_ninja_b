@@ -51,9 +51,9 @@ int main() {
      //print a simple distance
      Point d(0,0), c(0,1);
     std::cout << "Point c coordinates: ";
-    c.print();
+    std::cout << c.print() << std::endl;
     std::cout << "Point d coordinates: ";
-    d.print();
+    std::cout << d.print() << std::endl;
 
     // Calculate distance between two points
     double dist = d.distance(c);
@@ -62,9 +62,35 @@ int main() {
     // Move point a towards point b by a distance of 1
     Point e = c.moveTowards(c,d,1);
     std::cout << "Point c moved towards point d: ";
-    e.print();
+    std::cout << e.print() << std::endl;
     /*end Point class*/
 
-     return 0; // no memory issues. Team should free the memory of its members. both a and b teams are on the stack. 
+
+
+    /*Character class*/
+    // Create a point for character locations
+    Point p1(2.0, 3.0);
+    Point p2(5.0, 7.0);
+
+    // Create two characters
+    Character character1("Alice", p1, 100);
+    Character character2("Bob", p2, 80);
+
+    // Print character details
+    std::cout << character1.print() << std::endl;
+    std::cout << character2.print() << std::endl;
+
+    // Get the distance between characters
+    double distance = character1.distance(&character2);
+    std::cout << "Distance between characters: " << distance << std::endl;
+
+    // Hit character2
+    character2.hit(20);
+
+    // Print updated character details
+    std::cout << character1.print() << std::endl;
+    std::cout << character2.print() << std::endl;
+    /*end character class*/
+    return 0; // no memory issues. Team should free the memory of its members. both a and b teams are on the stack.
 
 }

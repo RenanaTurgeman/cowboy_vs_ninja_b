@@ -6,16 +6,27 @@ using namespace std;
 
 Character::Character(string name, Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
 
+int Character::getHitPoints() const {
+    return this->hit_point;
+}
+
+/* Returns true if the character has more than 0 hit points, and false otherwise*/
  bool Character::isAlive() const{
-    return true;
+    if(getHitPoints()>0)
+        return true;
+    return false;
  }
 
 double Character::distance(Character* other){
-    return 0;
+    return getLocation().distance(other->getLocation());
 }
             
 void Character::hit(int num){
-
+    if (num < 0) //this is error if this is negative number
+    {
+        throw invalid_argument("character cant hit with a negative hit points");
+    }
+    this->hit_point-= num;
 }
 
 string Character::getName() const{
@@ -27,11 +38,15 @@ Point Character::getLocation() const{
     return this->location;
 }
 
+/*Prints the character's name, hit points and location to the console.
+ * if the character is dead not print the hit points */
 string Character::print(){
-    return "hi";
+    string msg = "";
+    if (this->isAlive()){ //character alive
+        msg += "Name: " + this->getName() +". Hit points: " + to_string(this->getHitPoints()) + ". Location: " + this->getLocation().print();
+    }else{
+        msg += "(" + this->getName() + ")";
+    }
 
-}
-
-ostream& ariel::operator<<(std::ostream& ostream, const Character& character){
-    return  ostream;
+    return msg;
 }
