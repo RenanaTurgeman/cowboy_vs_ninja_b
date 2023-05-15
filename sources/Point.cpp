@@ -26,32 +26,24 @@ void Point::print() const{
 }
 
 // this function get 2 points and distance and return the closet point to the destination point from the source point
-Point Point::moveTowards(const Point &src, const Point &dst, double distance)
+Point Point::moveTowards(const Point& src, const Point& dst, double dist_src)
 {
-    if (distance < 0) //distance mast be a positive number or 0
+    if (dist_src < 0)
     {
-        throw std::invalid_argument("cant have negative distance");
+        throw std::invalid_argument("Distance cannot be negative number");
     }
 
-    // if distance from source longer than the distance between 2 points return the value of dst points
-    if(src.distance(dst) < distance)
-    {
-        return dst;
-    }
-    double my_distance = src.distance(dst); // calculate the distance between src and dst points
+    double dist = src.distance(dst);
+    double ratio = (dist <= 0) ? 0 : dist_src / dist;
 
-    // Calculate the direction vector between the two points
-    double dx = (dst.getX() - src.getX()) / my_distance;
-    double dy = (dst.getY() - src.getY()) / my_distance;
+    double new_x = src.getX() + (dst.getX() - src.getX()) * ratio;
+    double new_y = src.getY() + (dst.getY() - src.getY()) * ratio;
 
-    double new_x = src.getX() + dx * dist_src;
-    double new_y = src.getY() + dy * dist_src;
-
-    return Point (new_x, new_y);
+    return Point(new_x, new_y);
 }
 
 
-    std::ostream& operator<<(std::ostream& ostream, const Point& point) {
+std::ostream& operator<<(std::ostream& ostream, const Point& point) {
         ostream << "(" << point.getX() << ", " << point.getY() << ")";
         return ostream;
     }
