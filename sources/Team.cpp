@@ -8,7 +8,7 @@ Team::Team(Character* leader) : leader(leader) {
         throw runtime_error("ERROR: already a leader");
     }
     leader->setIsLeader();
-    this->fighters.pop_back(leader);
+    this->fighters.push_back(leader);
 }
 Team::~Team() {
     for (Character* fighter : fighters) {
