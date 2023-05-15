@@ -39,6 +39,6 @@ Team2::Team2(Character* leader): Team(leader) {}
 //    }
 //}
 
-void Team2::attack(Team *enemyTeam){
-
-}
+//void Team2::attack(Team *enemyTeam){
+//
+//}

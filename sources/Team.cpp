@@ -80,6 +80,9 @@ Character* Team::chose_target(Team* enemyTeam){
 }
 
 void Team::attack(Team* enemyTeam) {
+    if(enemyTeam == nullptr){
+        throw invalid_argument("ERROR: enemy team is nullptr");
+    }
     if (!leader){
         throw invalid_argument("ERROR: leader is nullptr");
     }

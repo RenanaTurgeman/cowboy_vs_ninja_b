@@ -22,7 +22,7 @@ namespace ariel {
             Team2(Character* leader);
             ~Team2() = default;
             // member functions
-            void attack(Team* enemyTeam) override;
+//            void attack(Team* enemyTeam) override;
     };
 }
 
