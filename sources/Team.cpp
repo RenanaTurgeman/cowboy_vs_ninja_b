@@ -3,7 +3,9 @@
 using namespace ariel;
 using namespace std;
 Team::Team() : leader(nullptr) {}
-Team::Team(Character* leader) : leader(leader) {}
+Team::Team(Character* leader) : leader(leader) {
+    fighters.push_back(leader);
+}
 Team::~Team() {
     for (Character* fighter : fighters) {
         delete fighter;
