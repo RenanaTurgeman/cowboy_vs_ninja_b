@@ -55,3 +55,19 @@ string Character::print(){
 
     return msg;
 }
+
+bool Character::getIsMember() {
+    return this->is_member;
+}
+
+void Character::setIsMember() {
+    this->is_member = true;
+}
+
+bool Character::getIsLeader() {
+    return this->is_leader;
+}
+
+void Character::setIsLeader() {
+    this->is_leader = true;
+}

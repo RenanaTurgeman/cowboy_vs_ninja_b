@@ -9,6 +9,7 @@ Cowboy::Cowboy(string name, const Point& location) : Character(name , location ,
 int Cowboy::getBullet() const {
     return this->bullet;
 }
+
 /*If the cowboy is not dead and has bullets left, the cowboy shoots the enemy,
  * subtracting 10 hit points from the enemy - and losing 1 bullet.
  * Otherwise, no damage will be done to the enemy.*/
@@ -24,10 +25,11 @@ void Cowboy::shoot(Character* enemy){
     }
 
     //if we got here its main the cowboy is alive
-
-    if(this->hasboolets()) { //if there are bullets left
-        enemy->hit(10); //subtracting 10 hit points from the enemy
-        --this->bullet; // cowboy losing 1 bullet
+    if(this->isAlive()) {
+        if (this->hasboolets()) { //if there are bullets left
+            enemy->hit(10); //subtracting 10 hit points from the enemy
+            --this->bullet; // cowboy losing 1 bullet
+        }
     }
 }
 

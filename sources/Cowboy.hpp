@@ -12,7 +12,7 @@ namespace ariel {
         public:
             Cowboy(); // default constructor
             Cowboy(std::string name, const Point& location);
-            ~Cowboy()= default;
+//            ~Cowboy()= default;
             int getBullet() const;
             void shoot(Character* enemy);
             bool hasboolets() const;

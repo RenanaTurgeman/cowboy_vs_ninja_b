@@ -4,7 +4,11 @@ using namespace ariel;
 using namespace std;
 Team::Team() : leader(nullptr) {}
 Team::Team(Character* leader) : leader(leader) {
-    fighters.push_back(leader);
+    if(leader->getIsLeader()){
+        throw runtime_error("ERROR: already a leader");
+    }
+    leader->setIsLeader();
+    this->fighters.pop_back(leader);
 }
 Team::~Team() {
     for (Character* fighter : fighters) {
@@ -13,16 +17,22 @@ Team::~Team() {
 }
 
 void Team::add(Character* fighter) {
-    for (Character* other : fighters){
-        if (other == fighter){
-            throw runtime_error("ERROR: this fighter is in the team.");
+    if (fighter->getIsMember()) {
+        throw runtime_error("ERROR: the fighter is a member in a different team.");
+    }
+
+    for (Character* other : fighters) {
+        if (other == fighter) {
+            throw runtime_error("ERROR: this fighter is already in the team.");
         }
     }
-    if(this->fighters.size() >= 10) //the team size cant be more than 10
-    {
-        throw runtime_error("ERROR: the time has already 10 fighters");
+
+    if (this->fighters.size() >= 10) {
+        throw runtime_error("ERROR: the team already has 10 fighters.");
     }
+
     fighters.push_back(fighter);
+    fighter->setIsMember();
 }
 
 void Team::setLeader(Character* new_leader) {

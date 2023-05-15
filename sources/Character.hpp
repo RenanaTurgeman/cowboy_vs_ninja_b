@@ -15,12 +15,16 @@ namespace ariel {
             std::string name;
             // The character's current hit points.
             int hit_point;
+            //for character to be only once in team
+            bool is_member = false;
+            //to indicate who is the leader
+            bool is_leader= false;
 
         public:
             /* Constructor for creating a new character with the given name, location, and hit points.*/
             Character(std::string name, const Point& location, int hit_point);
             Character();
-            virtual ~Character() = default;
+//            virtual ~Character() = default;
             /*getters*/
             int getHitPoints() const;
             /* Returns true if the character has more than 0 hit points, and false otherwise*/
@@ -36,9 +40,10 @@ namespace ariel {
             void setLocation(Point other);
             /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
-
-            friend std::ostream& operator<<(std::ostream& ostream, const Character& character); //TODO: check if really need (not work without)
-
+            virtual bool getIsMember();
+            virtual void setIsMember();
+            virtual bool getIsLeader();
+            virtual void setIsLeader();
         };
 }
 
