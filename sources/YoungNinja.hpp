@@ -8,12 +8,9 @@ namespace ariel {
     class YoungNinja : public Ninja{
         private:
         public:
+            YoungNinja();
             YoungNinja(std::string name, Point location);
             ~YoungNinja() = default;
-            /*Prints the character's name and location to the console.*/
-            std::string print() override;
-            friend std::ostream& operator<<(std::ostream& ostream, const YoungNinja& youngNinja); //TODO: check if really need (not work without)
-
     };
 }
 

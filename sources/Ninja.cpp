@@ -3,7 +3,7 @@
 using namespace ariel;
 using namespace std;
 Ninja::Ninja() : Character(), speed(0){}
-Ninja::Ninja(string name, Point& location, int hit_point, int speed): Character(name, location, hit_point) , speed(speed){}
+Ninja::Ninja(string name, const Point& location, int hit_point, int speed): Character(name, location, hit_point) , speed(speed){}
 
 int Ninja::getSpeed() {
     return this->speed;

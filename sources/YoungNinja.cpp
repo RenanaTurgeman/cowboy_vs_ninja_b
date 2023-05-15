@@ -2,15 +2,7 @@
 
 using namespace ariel;
 using namespace std;
-
-YoungNinja::YoungNinja(string name, Point location): Ninja(name,location,150,8){
-
-}
-
-string YoungNinja::print() {
-    return "hi";
-}
-
-ostream& ariel::operator<<(std::ostream& ostream, const YoungNinja& youngNinja){
-    return  ostream;
+//speed:14, hit points:100
+YoungNinja::YoungNinja() : Ninja("young", Point(), 100, 14){}
+YoungNinja::YoungNinja(string name, Point location): Ninja(name,location,100,14){
 }

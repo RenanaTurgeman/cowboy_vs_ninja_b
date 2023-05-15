@@ -2,15 +2,6 @@
 
 using namespace ariel;
 using namespace std;
-
-TrainedNinja::TrainedNinja(string name, Point location): Ninja(name,location,150,8){
-
-}
-
-string TrainedNinja::print() {
-    return "hi";
-}
-
-ostream& ariel::operator<<(std::ostream& ostream, const TrainedNinja& trainedNinja){
-    return  ostream;
-}
+//speed:12 , hit points: 120
+TrainedNinja::TrainedNinja():Ninja("trained", Point(), 120 , 12) {}
+TrainedNinja::TrainedNinja(string name, const Point location): Ninja(name,location,120,12){}
