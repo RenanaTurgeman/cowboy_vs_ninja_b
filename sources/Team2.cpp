@@ -1,26 +1,40 @@
 #include "Team2.hpp"
 using namespace ariel;
 using namespace std;
-Team2::Team2(Character& leader): leader(leader), fighters(){
-//    fighters.push_back(leader);
-}
-
-void Team2::add(Character& fighter){
-
-}
+Team2::Team2() :Team() {}
+Team2::Team2(Character& leader): Team(leader) {}
 
 void Team2::attack(Team2 *enemyTeam){
+    if (!leader) {
+        throw invalid_argument("ERROR: Leader is nullptr.");
+    }
 
-}
+    if (!leader->isAlive()) {
+        choose_leader();
+    }
 
-int Team2::stillAlive(){
-    return 0;
-}
+    if (leader) {
+        Character* target = choose_target();
 
-string Team2::print(){
-    return "hi";
+        if (target) {
+            for (Character* fighter : fighters) {
+                if (fighter->isAlive()) {
+                    if (fighter->distance(target) < 1) {
+                        fighter->slash(target);
+                    } else {
+                        fighter->move(target);
+                    }
+                }
+            }
 
-}
-ostream& ariel::operator<<(std::ostream& ostream, const Team2& team2){
-    return  ostream;
+            if (!target->isAlive()) {
+                Character* newTarget = choose_target();
+                if (newTarget) {
+                    target = newTarget;
+                } else {
+                    return;
+                }
+            }
+        }
+    }
 }

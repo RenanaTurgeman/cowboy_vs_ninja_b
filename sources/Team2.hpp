@@ -13,21 +13,15 @@
 using namespace std;
 
 namespace ariel {
-    class Team2{
+    class Team2 : public Team{
         private:
-            std::vector<std::unique_ptr<Character>> fighters; // vector to hold the fighters in the team
-            Character& leader; // pointer to the team leader
         public:
             // constructor and destructor
+            Team2();
             Team2(Character& leader);
             ~Team2() = default;
             // member functions
-            void add(Character& fighter);
-            void attack(Team2* enemyTeam);
-            int stillAlive();
-            std::string print();
-            friend std::ostream& operator<<(std::ostream& ostream, const Team2& team2); //TODO: check if really need (not work without)
-
+            void attack(Team2* enemyTeam) override;
     };
 }
 
