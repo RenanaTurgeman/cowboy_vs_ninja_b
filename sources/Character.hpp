@@ -37,13 +37,13 @@ namespace ariel {
             /*Returns the character's name*/
             std::string getName() const;
             /*Returns the character's current location.*/
-            Point getLocation() const;
+            const Point& getLocation() const;
             void setLocation(Point other);
             /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
             virtual bool getIsMember();
             virtual void setIsMember();
-            virtual bool getIsLeader();
+            virtual bool getIsLeader() const;
             virtual void setIsLeader();
         };
 }

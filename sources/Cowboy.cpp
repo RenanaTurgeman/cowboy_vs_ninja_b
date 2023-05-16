@@ -6,17 +6,14 @@ using namespace std;
 Cowboy::Cowboy() : Character("anonymous" , Point(), 110) , bullet(6){}
 Cowboy::Cowboy(string name, const Point& location) : Character(name , location , 110) , bullet(6){ }
 
-int Cowboy::getBullet() const {
-    return this->bullet;
-}
 
 /*If the cowboy is not dead and has bullets left, the cowboy shoots the enemy,
  * subtracting 10 hit points from the enemy - and losing 1 bullet.
  * Otherwise, no damage will be done to the enemy.*/
 void Cowboy::shoot(Character* enemy){
-    if (!enemy) {
-        throw invalid_argument("ERROR: cant shoot-enemy is nullptr");
-    }
+//    if (!enemy) {
+//        throw invalid_argument("ERROR: cant shoot-enemy is nullptr");
+//    }
     if(!enemy->isAlive()){ //if the enemy dead - error
         throw runtime_error("ERROR: the enemy is dead. cant shoot");
     }
@@ -53,5 +50,9 @@ string Cowboy::print() {
     string msg = "C: "; //before the name print C to indicate that is cowboy
     msg += Character::print();
     return msg;
+}
+
+int Cowboy::getBullet() const {
+    return this->bullet;
 }
 

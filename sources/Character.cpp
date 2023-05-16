@@ -1,5 +1,4 @@
 #include "Character.hpp"
-#include <iostream>
 
 using namespace ariel;
 using namespace std;
@@ -7,9 +6,6 @@ using namespace std;
 Character::Character():name("anonymous"), location(Point()), hit_point(0) {}
 Character::Character(string name, const Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
 
-int Character::getHitPoints() const {
-    return this->hit_point;
-}
 
 /* Returns true if the character has more than 0 hit points, and false otherwise*/
  bool Character::isAlive() const{
@@ -20,7 +16,7 @@ int Character::getHitPoints() const {
  }
 
 double Character::distance(Character* other){
-    return getLocation().distance(other->getLocation());
+    return this->getLocation().distance(other->getLocation());
 }
             
 void Character::hit(int num){
@@ -30,19 +26,6 @@ void Character::hit(int num){
     }
     this->hit_point -= num;
 }
-
-string Character::getName() const{
-    return this->name;
-}
-
-            
-Point Character::getLocation() const{
-    return this->location;
-}
-
-void Character::setLocation(Point other) {
-    this->location= other;
- }
 
 /*Prints the character's name, hit points and location to the console.
  * if the character is dead not print the hit points */
@@ -57,6 +40,25 @@ string Character::print(){
     return msg;
 }
 
+/*getters & setters */
+
+int Character::getHitPoints() const {
+    return this->hit_point;
+}
+
+string Character::getName() const{
+    return this->name;
+}
+
+
+const Point& Character::getLocation() const{
+    return this->location;
+}
+
+void Character::setLocation(Point other) {
+    this->location= other;
+}
+
 bool Character::getIsMember() {
     return this->is_member;
 }
@@ -65,7 +67,7 @@ void Character::setIsMember() {
     this->is_member = true;
 }
 
-bool Character::getIsLeader() {
+bool Character::getIsLeader() const {
     return this->is_leader;
 }
 

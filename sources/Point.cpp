@@ -21,6 +21,7 @@ double Point::distance(const Point& other) const{
     return sqrt(dx*dx + dy*dy);
 }
 
+
 string Point::print() const{
     string msg = "";
     msg = "(" + to_string(getX()) + ", " + to_string(getY()) + ")" ;

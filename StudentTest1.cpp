@@ -581,7 +581,7 @@ TEST_SUITE("Battle simulations") {
         team2.add(t23);
 
         team.attack(&team2);
-//        CHECK_EQ(t11->distance(t21), doctest::Approx(0).epsilon(0.001)); //TODO: dont pass
+        CHECK_EQ(t11->distance(t21), doctest::Approx(0).epsilon(0.001)); //TODO: dont pass
 //        CHECK_EQ(t12->distance(t21), doctest::Approx(0).epsilon(0.001));
 //        CHECK_EQ(t13->distance(t21), doctest::Approx(0).epsilon(0.001));
         CHECK(t21->isAlive());
