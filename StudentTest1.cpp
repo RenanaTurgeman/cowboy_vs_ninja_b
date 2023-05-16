@@ -457,20 +457,17 @@ TEST_SUITE("Battle simulations") {
 
         multi_attack(2, team, team2);
         CHECK_FALSE(trained_ninja->isAlive()); // Trained ninja should be dead
-//        cout << "hit points:" <<old_ninja->getHitPoints() << endl; // TODO: i had it
-//        CHECK(!old_ninja->isAlive()); // TODO: i had this - not pass. check
-//        CHECK((!old_ninja->isAlive() && young_ninja2->isAlive())); //TODO: not pass
+        CHECK((!old_ninja->isAlive() && young_ninja2->isAlive()));
 
         multi_attack(4, team, team2);
-//        cout << "hit points:" <<old_ninja->getHitPoints() << endl; // TODO: i had it
-//        CHECK_FALSE(old_ninja->isAlive()); // Old ninja should be dead //TODO: ddddont pass
-//        CHECK(!young_ninja2->isAlive());
-//
+        CHECK_FALSE(old_ninja->isAlive()); // Old ninja should be dead
+        CHECK(!young_ninja2->isAlive());
+
         multi_attack(2, team, team2);
         CHECK_NOTHROW(team.attack(
                 &team2)); // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
-//        CHECK_FALSE(young_ninja2->isAlive()); // Young ninja should be dead //TODO: ddddont pass
-//        CHECK_THROWS_AS(team.attack(&team2), std::runtime_error); // Attacking a dead team should throw an exception
+        CHECK_FALSE(young_ninja2->isAlive()); // Young ninja should be dead
+        CHECK_THROWS_AS(team.attack(&team2), std::runtime_error); // Attacking a dead team should throw an exception
     }
 
     /*
@@ -521,7 +518,7 @@ TEST_SUITE("Battle simulations") {
 
         while (team1.stillAlive() && team2.stillAlive()) {
             team1.attack(&team2);
-//            team2.attack(&team1); //TODO: dont pass
+            team2.attack(&team1);
         }
     }
 
@@ -581,70 +578,70 @@ TEST_SUITE("Battle simulations") {
         team2.add(t23);
 
         team.attack(&team2);
-        CHECK_EQ(t11->distance(t21), doctest::Approx(0).epsilon(0.001)); //TODO: dont pass
-//        CHECK_EQ(t12->distance(t21), doctest::Approx(0).epsilon(0.001));
-//        CHECK_EQ(t13->distance(t21), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t11->distance(t21), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t12->distance(t21), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t13->distance(t21), doctest::Approx(0).epsilon(0.001));
         CHECK(t21->isAlive());
         multi_attack(3, team, team2);
-//        CHECK_FALSE(t21->isAlive()); // The first move in the attack should be a shot by the cowboy that kills t21
+        CHECK_FALSE(t21->isAlive()); // The first move in the attack should be a shot by the cowboy that kills t21
 
-//        // After the cowboy kills t21, all the ninja should move towards t22.
-//        CHECK_EQ(t11->distance(t22), doctest::Approx(0).epsilon(0.001)); //TODO: dont pass
-//        CHECK_EQ(t12->distance(t22), doctest::Approx(0).epsilon(0.001));
-//        CHECK_EQ(t13->distance(t22), doctest::Approx(0).epsilon(0.001));
+        // After the cowboy kills t21, all the ninja should move towards t22.
+        CHECK_EQ(t11->distance(t22), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t12->distance(t22), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t13->distance(t22), doctest::Approx(0).epsilon(0.001));
 
         // Moving the captain behind t23, making t23 the new closest enemy.
         Cowboy decoy{"decoy", Point{-5, -5}};
         decoy.shoot(t23); //A shot needed to kill t23 in the next attack without making the ninjas move to next target
         t11->move(&decoy);
         multi_attack(3, team, team2);
-//        CHECK_EQ(t11->distance(t23), doctest::Approx(0).epsilon(0.001)); //TODO:dont pass
-//        CHECK_EQ(t12->distance(t23), doctest::Approx(0).epsilon(0.001));
-//        CHECK_EQ(t13->distance(t23), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t11->distance(t23), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t12->distance(t23), doctest::Approx(0).epsilon(0.001));
+        CHECK_EQ(t13->distance(t23), doctest::Approx(0).epsilon(0.001));
 
-//        CHECK((!t21->isAlive() && !t22->isAlive() && !t23->isAlive()));
+        CHECK((!t21->isAlive() && !t22->isAlive() && !t23->isAlive()));
 
-//        CHECK_NOTHROW(simulate_battle(team, team2));
+        CHECK_NOTHROW(simulate_battle(team, team2));
     }
 
     TEST_CASE("Run full battles using random_char to ensure full functionality") {
         SUBCASE("Team vs Team") {
-//            Team team{random_char()};
-//            Team team2{random_char()};
-//            for (int i = 0; i < MAX_TEAM - 1; i++) {
-//                team.add(random_char());
-//                team2.add(random_char());
-//            }
+            Team team{random_char()};
+            Team team2{random_char()};
+            for (int i = 0; i < MAX_TEAM - 1; i++) {
+                team.add(random_char());
+                team2.add(random_char());
+            }
 
-//            simulate_battle(team, team2);
+            simulate_battle(team, team2);
 
-//            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
+            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
         }
 
-//        SUBCASE("Team vs Team2") {
-//            Team team{random_char()};
-//            Team2 team2{random_char()};
-//            for (int i = 0; i < MAX_TEAM - 1; i++) {
-//                team.add(random_char());
-//                team2.add(random_char());
-//            }
-//
-//            simulate_battle(team, team2);
-//
-//            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
-//        }
+        SUBCASE("Team vs Team2") {
+            Team team{random_char()};
+            Team2 team2{random_char()};
+            for (int i = 0; i < MAX_TEAM - 1; i++) {
+                team.add(random_char());
+                team2.add(random_char());
+            }
 
-//        SUBCASE("Team2 vs Team2") {
-//            Team2 team{random_char()};
-//            Team2 team2{random_char()};
-//            for (int i = 0; i < MAX_TEAM - 1; i++) {
-//                team.add(random_char());
-//                team2.add(random_char());
-//            }
-//
-//            simulate_battle(team, team2);
-//
-//            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
-//        }
+            simulate_battle(team, team2);
+
+            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
+        }
+
+        SUBCASE("Team2 vs Team2") {
+            Team2 team{random_char()};
+            Team2 team2{random_char()};
+            for (int i = 0; i < MAX_TEAM - 1; i++) {
+                team.add(random_char());
+                team2.add(random_char());
+            }
+
+            simulate_battle(team, team2);
+
+            CHECK(((team.stillAlive() && !team2.stillAlive()) || (!team.stillAlive() && team2.stillAlive())));
+        }
     }
 }

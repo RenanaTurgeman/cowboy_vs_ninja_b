@@ -182,10 +182,10 @@ int Team::stillAlive() {
     return count;
 }
 
-string Team::print() {
+void Team::print() {
     string result;
     for (Character* fighter : fighters) {
         result += fighter->print() + "\n";
     }
-    return result;
+    cout << result <<endl;
 }

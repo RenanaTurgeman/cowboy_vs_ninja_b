@@ -30,7 +30,7 @@ void Ninja::slash(Character* enemy) {
         double distance = getLocation().distance(enemy->getLocation());
 
         // Slash if the distance is less than 1 meter
-        if (distance < 1.0) {
+        if (distance <= 1.0) {
             // Hit the enemy with 40 points
             enemy->hit(40);
         }

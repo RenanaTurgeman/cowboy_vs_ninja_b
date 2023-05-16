@@ -31,7 +31,7 @@ namespace ariel {
             void add(Character* fighter);
             virtual void attack(Team* enemyTeam);
             int stillAlive();
-            std::string print();
+            void print();
     };
 }
 
