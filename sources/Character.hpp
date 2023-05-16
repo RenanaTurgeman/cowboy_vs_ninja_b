@@ -27,6 +27,7 @@ namespace ariel {
 //            virtual ~Character() = default;
             /*getters*/
             int getHitPoints() const;
+            void setHitPoints(int num);
             /* Returns true if the character has more than 0 hit points, and false otherwise*/
             bool isAlive() const;
             /*Calculates the distance between this character and another character.*/

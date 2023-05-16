@@ -15,7 +15,7 @@ int Cowboy::getBullet() const {
  * Otherwise, no damage will be done to the enemy.*/
 void Cowboy::shoot(Character* enemy){
     if (!enemy) {
-        throw invalid_argument("ERROR: enemy is nullptr");
+        throw invalid_argument("ERROR: cant shoot-enemy is nullptr");
     }
     if(!enemy->isAlive()){ //if the enemy dead - error
         throw runtime_error("ERROR: the enemy is dead. cant shoot");

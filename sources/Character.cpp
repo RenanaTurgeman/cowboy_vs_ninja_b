@@ -13,9 +13,10 @@ int Character::getHitPoints() const {
 
 /* Returns true if the character has more than 0 hit points, and false otherwise*/
  bool Character::isAlive() const{
-    if(getHitPoints()>0)
-        return true;
-    return false;
+//    if(getHitPoints()>0)
+//        return true;
+//    return false;
+    return getHitPoints() > 0;
  }
 
 double Character::distance(Character* other){
@@ -70,4 +71,8 @@ bool Character::getIsLeader() {
 
 void Character::setIsLeader() {
     this->is_leader = true;
+}
+
+void Character::setHitPoints(int num) {
+    this->hit_point = num;
 }
