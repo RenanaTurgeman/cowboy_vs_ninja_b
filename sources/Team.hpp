@@ -18,6 +18,7 @@ namespace ariel {
             std::vector<Character *> fighters; // vector to hold the fighters in the team
             void chose_leader();
             Character* chose_target(Team* enemyTeam);
+            void attack_target(Character* target, Team* enemyTeam);
 
         public:
             // constructor and destructor

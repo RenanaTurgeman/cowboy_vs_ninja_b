@@ -86,8 +86,10 @@ void Team::attack(Team* enemyTeam) {
     if (!leader){
         throw invalid_argument("ERROR: leader is nullptr");
     }
-
-    if ( !leader->isAlive()) { //check if the leader is not alive
+    if(enemyTeam->stillAlive() == 0){
+        throw runtime_error("ERROR: the team is dead");
+    }
+    if ( !(this->leader->isAlive())) { //check if the leader is not alive
         chose_leader();
     }
 
@@ -98,37 +100,48 @@ void Team::attack(Team* enemyTeam) {
 
         // Attack the target if it exists
         if (target) {
-            for (Character* fighter : fighters) {
-                if (fighter->isAlive()) { // all the lives fighters attack the target
-                    if (Cowboy* cowboy = dynamic_cast<Cowboy*>(fighter)) {
-                        if (cowboy->hasboolets()) { //cowboy that have bullets shoot the target
-                            cowboy->shoot(target);
-                        } else { //cowboy that not have bullets reload there guns
-                            cowboy->reload();
-                        }
-                    } else if (Ninja* ninja = dynamic_cast<Ninja*>(fighter)) {
-                        if (ninja->distance(target) < 1) { //ninja that in distance < 1 meter from target- slash him
-                            ninja->slash(target);
-                        } else { //ninja that are in distance > 1 move
-                            ninja->move(target);
-                        }
-                    }
-                }
-            }
+            attack_target(target, enemyTeam);
+        }
+    }
+}
 
-            // Check if the target is dead and find a new target if needed
-            if (!target->isAlive()) {
-                Character* newTarget = nullptr;
-                newTarget = chose_target(enemyTeam);
-                if (newTarget) {
-                    target = newTarget;
-                } else {
-                    // No more alive enemies
-                    return;
+void Team::attack_target(Character *target, Team *enemyTeam) {
+    // ****first go over all the cowboys**** //
+    for (Character* fighter : this->fighters) {
+        if (fighter == NULL){ return;}
+        if (fighter->isAlive()) { // all the lives fighters attack the target
+            if (Cowboy* cowboy = dynamic_cast<Cowboy*>(fighter)) { //check if the to cowboy success
+                if (cowboy->hasboolets()) { //cowboy that have bullets shoot the target
+                    cowboy->shoot(target); //the cowboy shoot
+                    if(!(target->isAlive())){
+                        //in the case the target is dead - change to different cowboy
+                        target = chose_target(enemyTeam);
+                    }
+                } else { //cowboy that not have bullets reload there guns
+                    cowboy->reload();
                 }
             }
         }
     }
+
+    // ****second go over all the ninja**** //
+    for (Character* fighter : this->fighters) {
+        if (fighter == NULL){ return;}
+        if (fighter->isAlive()) { // all the lives fighters attack the target
+            if (Ninja* ninja = dynamic_cast<Ninja*>(fighter)) { //check if the cast to ninja success
+                if (ninja->distance(target) < 1) { //ninja that in distance < 1 meter from target- slash him
+                    ninja->slash(target); //the ninja slash
+                    if(!(target->isAlive())){
+                        //in the case the target is dead - change to different cowboy
+                        target = chose_target(enemyTeam);
+                    }
+                } else { //ninja that are in distance > 1 move
+                    ninja->move(target);
+                }
+            }
+        }
+    }
+
 }
 
 int Team::stillAlive() {
