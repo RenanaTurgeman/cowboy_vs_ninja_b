@@ -4,10 +4,7 @@ using namespace ariel;
 using namespace std;
 Ninja::Ninja() : Character(), speed(0){}
 Ninja::Ninja(string name, const Point& location, int hit_point, int speed): Character(name, location, hit_point) , speed(speed){}
-
-int Ninja::getSpeed() {
-    return this->speed;
-}
+Ninja::~Ninja(){}
 
 void Ninja::move(const Character* enemy){
     Point other = Point::moveTowards(getLocation(), enemy->getLocation(), getSpeed()); //find the closest point to the enemy
@@ -41,4 +38,8 @@ string Ninja::print() {
     string msg = "N: "; //indicate its a ninja
     msg += Character::print();
     return msg;
+}
+
+int Ninja::getSpeed() {
+    return this->speed;
 }

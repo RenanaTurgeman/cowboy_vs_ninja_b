@@ -11,7 +11,7 @@ namespace ariel {
         public:
             Ninja();
             Ninja(std::string name, const Point& location, int hit_point, int speed);
-            ~Ninja() = default; 
+            ~Ninja();
             int getSpeed();
             void move(const Character* enemy);
             void slash(Character* enemy);

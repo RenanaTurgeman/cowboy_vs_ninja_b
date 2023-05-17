@@ -2,13 +2,12 @@
 #include "cmath"
 using namespace ariel;
 using namespace std;
-Point::Point() : x_coor(0.0), y_coor(0.0) {
+Point::Point() : x_coor(0.0), y_coor(0.0) {}
 
-}
+Point::Point(double x_coor, double y_coor): x_coor(x_coor), y_coor(y_coor){}
 
-Point::Point(double x_coor, double y_coor): x_coor(x_coor), y_coor(y_coor){
+Point::~Point() {}
 
-}
 double Point::getX() const{
     return this->x_coor;
 }
@@ -35,7 +34,9 @@ Point Point::moveTowards(const Point& src, const Point& dst, double dist_src)
     {
         throw std::invalid_argument("Distance cannot be negative number");
     }
-
+    if(src.distance(dst) < dist_src){
+        return Point(dst.getX() , dst.getY());
+    }
     double dist = src.distance(dst);
     double ratio = (dist <= 0) ? 0 : dist_src / dist;
 

@@ -5,7 +5,7 @@ using namespace std;
 //cowboy create with 6 bullets and 110 hit points
 Cowboy::Cowboy() : Character("anonymous" , Point(), 110) , bullet(6){}
 Cowboy::Cowboy(string name, const Point& location) : Character(name , location , 110) , bullet(6){ }
-
+Cowboy::~Cowboy(){}
 
 /*If the cowboy is not dead and has bullets left, the cowboy shoots the enemy,
  * subtracting 10 hit points from the enemy - and losing 1 bullet.
@@ -37,7 +37,7 @@ void Cowboy::reload(){
     if(!this->isAlive()){
         throw runtime_error("Error: cant reload, the cowboy is dead");
     }
-    this->bullet =6; //TODO: check if it nedd to be +=
+    this->bullet =6;
 }
 
 bool Cowboy::hasboolets() const {

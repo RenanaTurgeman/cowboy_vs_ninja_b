@@ -6,11 +6,11 @@
 
 namespace ariel {
     class OldNinja : public Ninja{
-        private:
+//        private:
         public:
             OldNinja();
             OldNinja(std::string name, const Point& location);
-            ~OldNinja() = default;
+            ~OldNinja();
     };
 }
 
