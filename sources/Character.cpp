@@ -2,23 +2,21 @@
 
 using namespace ariel;
 using namespace std;
-
+// Constructor & Destructor
 Character::Character():name("anonymous"), location(Point()), hit_point(0) {}
 Character::Character(string name, const Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
 Character::~Character() {}
 
 /* Returns true if the character has more than 0 hit points, and false otherwise*/
  bool Character::isAlive() const{
-//    if(getHitPoints()>0)
-//        return true;
-//    return false;
     return getHitPoints() > 0;
  }
 
 double Character::distance(Character* other){
     return this->getLocation().distance(other->getLocation());
 }
-            
+
+/* Decreases the character's hit points by the given number.*/
 void Character::hit(int num){
     if (num < 0) //this is error if this is negative number
     {

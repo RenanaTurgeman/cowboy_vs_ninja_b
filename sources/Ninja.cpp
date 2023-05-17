@@ -2,15 +2,18 @@
 
 using namespace ariel;
 using namespace std;
+// Constructor & Destructor
 Ninja::Ninja() : Character(), speed(0){}
 Ninja::Ninja(string name, const Point& location, int hit_point, int speed): Character(name, location, hit_point) , speed(speed){}
 Ninja::~Ninja(){}
-
+/*get a pointer to the enemy and move towards the enemy. The ninja move a distance equal to its speed */
 void Ninja::move(const Character* enemy){
     Point other = Point::moveTowards(getLocation(), enemy->getLocation(), getSpeed()); //find the closest point to the enemy
     setLocation(other); //set the location to be the new location
 }
 
+/*If the ninja is alive and the enemy is less than 1 meter away,
+ * the ninja will deal 40 damage to the enemy. Otherwise, no damage will be done to the enemy. */
 void Ninja::slash(Character* enemy) {
     if (!enemy->isAlive()) {
         throw runtime_error("ERROR: enemy is dead, can't slash");
