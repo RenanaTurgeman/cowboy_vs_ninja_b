@@ -29,8 +29,8 @@ namespace ariel {
             void setLeader(Character* new_leader);
             Character* getLeader() const;
             /*get ninja or cowboy and add them to the group*/
-            void add(Character* fighter);
-            virtual void attack(Team* enemyTeam);
+            virtual void add(Character* fighter);
+            void attack(Team* enemyTeam);
             int stillAlive();
             void print();
     };

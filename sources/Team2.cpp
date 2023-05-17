@@ -4,41 +4,23 @@ using namespace std;
 Team2::Team2() :Team() {}
 Team2::Team2(Character* leader): Team(leader) {}
 
-//void Team2::attack(Team *enemyTeam){
-//    if (!getLeader()) {
-//        throw invalid_argument("ERROR: Leader is nullptr.");
-//    }
-//
-//    if (!getLeader()->isAlive()) {
-//        chose_leader();
-//    }
-//
-//    if (getLeader()) {
-//        Character* target = chose_target();
-//
-//        if (target) {
-//            for (Character* fighter : fighters) {
-//                if (fighter->isAlive()) {
-//                    if (fighter->distance(target) < 1) {
-//                        fighter->slash(target);
-//                    } else {
-//                        fighter->move(target);
-//                    }
-//                }
-//            }
-//
-//            if (!target->isAlive()) {
-//                Character* newTarget = chose_target();
-//                if (newTarget) {
-//                    target = newTarget;
-//                } else {
-//                    return;
-//                }
-//            }
-//        }
-//    }
-//}
+void Team2::add(Character* fighter) {
+    if (fighter->getIsMember()) {
+        throw runtime_error("ERROR: the fighter is a member in a different team.");
+    }
 
-//void Team2::attack(Team *enemyTeam){
-//
-//}
+    for (Character* other : fighters) {
+        if (other == fighter) {
+            throw runtime_error("ERROR: this fighter is already in the team.");
+        }
+    }
+
+    if (this->fighters.size() >= 10) {
+        throw runtime_error("ERROR: the team already has 10 fighters.");
+    }
+
+    if (fighters.size() < 10) {
+        fighters.insert(fighters.begin(),fighter);
+    }
+    fighter->setIsMember();
+}
