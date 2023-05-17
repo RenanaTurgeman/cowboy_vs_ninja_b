@@ -24,21 +24,21 @@ namespace ariel {
             /* Constructor for creating a new character with the given name, location, and hit points.*/
             Character(std::string name, const Point& location, int hit_point);
             Character();
-//            virtual ~Character() = default;
+            virtual ~Character();
             /*getters*/
-            int getHitPoints() const;
-            void setHitPoints(int num);
+            virtual int getHitPoints() const;
+            virtual void setHitPoints(int num);
             /* Returns true if the character has more than 0 hit points, and false otherwise*/
-            bool isAlive() const;
+            virtual bool isAlive() const;
             /*Calculates the distance between this character and another character.*/
-            double distance(Character* other);
+            virtual double distance(Character* other);
             /* Decreases the character's hit points by the given number.*/
-            void hit(int num);
+            virtual void hit(int num);
             /*Returns the character's name*/
-            std::string getName() const;
+            virtual std::string getName() const;
             /*Returns the character's current location.*/
-            const Point& getLocation() const;
-            void setLocation(Point other);
+            virtual const Point& getLocation() const;
+            virtual void setLocation(Point other);
             /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
             virtual bool getIsMember();

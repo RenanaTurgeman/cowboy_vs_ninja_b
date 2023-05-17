@@ -5,7 +5,7 @@ using namespace std;
 
 Character::Character():name("anonymous"), location(Point()), hit_point(0) {}
 Character::Character(string name, const Point& location, int hit_point):name(name) , location(location), hit_point(hit_point){ }
-
+Character::~Character() {}
 
 /* Returns true if the character has more than 0 hit points, and false otherwise*/
  bool Character::isAlive() const{
