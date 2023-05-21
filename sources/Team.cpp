@@ -36,9 +36,9 @@ void Team::add(Character* fighter) {
 
     if (fighters.size() < 10) {
         if(Cowboy* cowboy = dynamic_cast<Cowboy*>(fighter)){
-            fighters.insert(fighters.begin(),fighter);
+            fighters.insert(fighters.begin(),fighter); //if its cowboy insert in the beginning of the vector
         }else{
-            fighters.push_back(fighter);
+            fighters.push_back(fighter); //if its ninja insert in the end of the vector
         }
     }
     fighter->setIsMember();

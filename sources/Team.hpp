@@ -16,8 +16,8 @@ namespace ariel {
             Character* leader; // pointer to the team leader
         protected:
             std::vector<Character *> fighters; // vector to hold the fighters in the team
-            void chose_leader();     // search the closest fighter to the leader that alive
-            Character* chose_target(Team* enemyTeam); // search the closest enemy to the leader that alive
+            virtual void chose_leader();     // search the closest fighter to the leader that alive
+            virtual Character* chose_target(Team* enemyTeam); // search the closest enemy to the leader that alive
             void attack_target(Character* target, Team* enemyTeam);
 
         public:

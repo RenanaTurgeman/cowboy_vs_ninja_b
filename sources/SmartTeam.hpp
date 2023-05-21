@@ -5,10 +5,14 @@
 
 #include <iostream>
 #include <vector>
-
+#include <random>
+#include <unordered_map>
+#include <stdexcept>
 namespace ariel {
     class SmartTeam: public Team{
         private:
+    protected:
+        void chose_leader() override;
         public:
             // constructor and destructor
             SmartTeam();
@@ -16,7 +20,8 @@ namespace ariel {
             ~SmartTeam() = default;
             // member functions
             void attack(Team* enemyTeam) ;
-    };
+            Character* findClosest(Character *ninja);
+        };
 }
 
 #endif

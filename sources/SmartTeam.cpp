@@ -5,42 +5,81 @@ SmartTeam::SmartTeam() : Team(){}
 SmartTeam::SmartTeam(Character* leader): Team(leader){
 }
 
-//void SmartTeam::attack(Team* enemyTeam){
-//
-//}
-//void SmartTeam::attack(Team *enemyTeam){
-//    if (!getLeader()) {
-//        throw invalid_argument("ERROR: Leader is nullptr.");
-//    }
-//
-//    if (!getLeader()->isAlive()) {
-//        chose_leader();
-//    }
-//
-//    if (getLeader()) {
-//        Character* target = chose_target();
-//
-//        if (target) {
-//            for (Character* fighter : fighters) {
-//                if (fighter->isAlive()) {
-//                    if (fighter->distance(target) < 1) {
-//                        fighter->Ninja::slash(target);
-//                    } else {
-//                        fighter->Ninja::move(target);
-//                    }
-//                }
-//            }
-//
-//            if (!target->isAlive()) {
-//                Character* newTarget =  chose_target();
-//                if (newTarget) {
-//                    target = newTarget;
-//                } else {
-//                    return;
-//                }
-//            }
-//        }
-//    }
-//}
 void SmartTeam::attack(Team *enemyTeam) {
+    this-> chose_leader(); // here is mt strategy to choose a leader based on the proximity counts of the living ninjas to other characters
+    Team::attack(enemyTeam);
+}
+
+Character* SmartTeam::findClosest(Character *ninja) {
+    Character* closestChar = nullptr;
+    double minDistance = std::numeric_limits<double>::max();
+
+    for (Character* fighter : fighters) {
+        if (fighter->isAlive()) {
+            double distance = fighter->distance(ninja);
+            if (distance < minDistance) {
+                closestChar = fighter;
+                minDistance = distance;
+            }
+        }
+    }
+
+    return closestChar;
+}
+//the function tries to find a suitable leader for the SmartTeam based on proximity counts and,
+// if that fails, selects a random living character as the leader.
+void SmartTeam::chose_leader() {
+    // Create a map to store the count of proximity for each character
+    std::unordered_map<Character*, int> proximityCounts;
+
+    // Iterate over the fighters to find the closest character to each living ninja
+    for (Character* fighter : fighters) {
+        // Check if the fighter is a ninja and is alive
+        Ninja* ninja = dynamic_cast<Ninja*>(fighter);
+        if (ninja != nullptr && ninja->isAlive()) {
+            // Find the closest character to the ninja
+            Character* closestChar = findClosest(ninja);
+            if (closestChar != nullptr) {
+                // Increment the count of proximity for the closest character
+                proximityCounts[closestChar]++;
+            }
+        }
+    }
+
+    Character* nextLeader = nullptr;
+    int maxCount = 0;
+
+    // Find the character with the highest count of proximity
+    for (const auto& pair : proximityCounts) {
+        if (pair.second > maxCount) {
+            nextLeader = pair.first;
+            maxCount = pair.second;
+        }
+    }
+
+    // If no suitable leader is found among characters that are closest to the most ninjas,
+    // pick a random living character as the leader.
+    if (nextLeader == nullptr) {
+        vector<Character*> livingFighters;
+        for (Character* fighter : fighters) {
+            if (fighter->isAlive()) {
+                livingFighters.push_back(fighter);
+            }
+        }
+
+        if (!livingFighters.empty()) {
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<std::vector<Character*>::size_type> distrib(0, livingFighters.size() - 1);
+
+            nextLeader = livingFighters[distrib(gen)];
+        }
+    }
+
+    // If there are no living characters in the team, the team has lost.
+    if (nextLeader == nullptr) {
+        throw runtime_error("No suitable leader could be found");
+    }
+
+    setLeader(nextLeader);
 }
