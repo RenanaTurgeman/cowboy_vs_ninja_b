@@ -10,7 +10,14 @@ namespace ariel {
         public:
             YoungNinja();
             YoungNinja(std::string name, Point location);
-            ~YoungNinja() = default;
+            ~YoungNinja() override = default; //for tidy
+
+            //for tidy:
+            YoungNinja(const YoungNinja&) = delete; // Copy constructor
+            YoungNinja& operator=(const YoungNinja&) = delete; // Copy assignment operator
+            YoungNinja(YoungNinja&&) = delete; // Move constructor
+            YoungNinja& operator=(YoungNinja&&) = delete; // Move assignment operator
+
     };
 }
 

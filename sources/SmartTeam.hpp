@@ -15,12 +15,18 @@ namespace ariel {
         void chose_leader() override;
         public:
             // constructor and destructor
-            SmartTeam();
+//            SmartTeam() : Team(){} //do it alone
             SmartTeam(Character* leader);
-            ~SmartTeam() = default;
+            ~SmartTeam() override = default;
             // member functions
             void attack(Team* enemyTeam) ;
             Character* findClosest(Character *ninja);
+
+            //for tidy:
+            SmartTeam(const SmartTeam&) = delete; // Copy constructor
+            SmartTeam& operator=(const SmartTeam&) = delete; // Copy assignment operator
+            SmartTeam(SmartTeam&&) = delete; // Move constructor
+            SmartTeam& operator=(SmartTeam&&) = delete; // Move assignment operator
         };
 }
 

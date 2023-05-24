@@ -9,18 +9,18 @@ void Team2::add(Character* fighter) {
         throw runtime_error("ERROR: the fighter is a member in a different team.");
     }
 
-    for (Character* other : fighters) {
+    for (Character* other : getFighters()) {
         if (other == fighter) {
             throw runtime_error("ERROR: this fighter is already in the team.");
         }
     }
 
-    if (this->fighters.size() >= 10) {
+    if (getFighters().size() >= 10) {
         throw runtime_error("ERROR: the team already has 10 fighters.");
     }
 
-    if (fighters.size() < 10) {
-        fighters.insert(fighters.begin(),fighter);
+    if (getFighters().size() < 10) {
+        getFighters().insert(getFighters().begin(),fighter);
     }
     fighter->setIsMember();
 }

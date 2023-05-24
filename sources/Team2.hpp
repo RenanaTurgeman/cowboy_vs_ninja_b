@@ -20,9 +20,16 @@ namespace ariel {
             // constructor and destructor
             Team2();
             Team2(Character* leader);
-            ~Team2() = default;
+            ~Team2() override = default; //for tidy
             // member functions
             void add(Character* fighter) override;
+
+            //for tidy:
+            Team2(const Team2&) = delete; // Copy constructor
+            Team2& operator=(const Team2&) = delete; // Copy assignment operator
+            Team2(Team2&&) = delete; // Move constructor
+            Team2& operator=(Team2&&) = delete; // Move assignment operator
+
     };
 }
 

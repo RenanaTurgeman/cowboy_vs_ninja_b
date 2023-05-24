@@ -6,11 +6,16 @@
 
 namespace ariel {
     class OldNinja : public Ninja{
-//        private:
         public:
             OldNinja();
             OldNinja(std::string name, const Point& location);
-            ~OldNinja();
+            ~OldNinja() override; //override for tidy
+
+            //for tidy:
+            OldNinja(const OldNinja &) = delete;
+            OldNinja &operator=(const OldNinja &) = delete;
+            OldNinja(OldNinja &&) = delete;
+            OldNinja &operator=(OldNinja &&) = delete;
     };
 }
 

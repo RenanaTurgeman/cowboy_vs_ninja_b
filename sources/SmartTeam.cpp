@@ -1,7 +1,6 @@
 #include "SmartTeam.hpp"
 using namespace ariel;
 using namespace std;
-SmartTeam::SmartTeam() : Team(){}
 SmartTeam::SmartTeam(Character* leader): Team(leader){
 }
 
@@ -14,7 +13,7 @@ Character* SmartTeam::findClosest(Character *ninja) {
     Character* closestChar = nullptr;
     double minDistance = std::numeric_limits<double>::max();
 
-    for (Character* fighter : fighters) {
+    for (Character* fighter : getFighters()) {
         if (fighter->isAlive()) {
             double distance = fighter->distance(ninja);
             if (distance < minDistance) {
@@ -33,7 +32,7 @@ void SmartTeam::chose_leader() {
     std::unordered_map<Character*, int> proximityCounts;
 
     // Iterate over the fighters to find the closest character to each living ninja
-    for (Character* fighter : fighters) {
+    for (Character* fighter : getFighters()) {
         // Check if the fighter is a ninja and is alive
         Ninja* ninja = dynamic_cast<Ninja*>(fighter);
         if (ninja != nullptr && ninja->isAlive()) {
@@ -61,7 +60,7 @@ void SmartTeam::chose_leader() {
     // pick a random living character as the leader.
     if (nextLeader == nullptr) {
         vector<Character*> livingFighters;
-        for (Character* fighter : fighters) {
+        for (Character* fighter : getFighters()) {
             if (fighter->isAlive()) {
                 livingFighters.push_back(fighter);
             }

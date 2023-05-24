@@ -12,7 +12,7 @@ namespace ariel {
         public:
             Cowboy(); // default constructor
             Cowboy(std::string name, const Point& location);
-            ~Cowboy();
+            ~Cowboy() override; //override for tidy
             int getBullet() const;
             /*the cowboy shoots the enemy by subtracting 10 hit points from the enemy - and losing 1 bullet*/
             void shoot(Character* enemy);
@@ -23,6 +23,12 @@ namespace ariel {
 
             /*Prints the character's name and location to the console.*/
             std::string print() override;
+
+            //for tidy:
+            Cowboy(const Cowboy &) = delete;
+            Cowboy &operator=(const Cowboy &) = delete;
+            Cowboy(Cowboy &&) = delete;
+            Cowboy &operator=(Cowboy &&) = delete;
 
     };
 }

@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace ariel {
-    // This class represents a character in a game world. 
+    // This class represents a character in a game world.
     class Character {
         // protected:
         private:
@@ -38,14 +38,20 @@ namespace ariel {
             virtual std::string getName() const;
             /*Returns the character's current location.*/
             virtual const Point& getLocation() const;
-            virtual void setLocation(Point other);
+            void setLocation(Point other);
             /*Prints the character's name, hit points and location to the console.*/
             virtual std::string print();
             virtual bool getIsMember();
             virtual void setIsMember();
             virtual bool getIsLeader() const;
             virtual void setIsLeader();
-        };
+
+            //for tidy:
+            Character(const Character&) = delete; // delete copy constructor
+            Character& operator=(const Character&) = delete; // delete copy assignment operator
+            Character(Character&&) = delete; // delete move constructor
+            Character& operator=(Character&&) = delete; // delete move assignment operator
+    };
 }
 
 #endif

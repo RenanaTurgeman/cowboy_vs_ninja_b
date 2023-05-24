@@ -11,10 +11,10 @@ Team::Team(Character* leader) : leader(leader) {
         throw runtime_error("leader is nullptr");
     }
     leader->setIsLeader();
-    this->fighters.push_back(leader);
+    getFighters().push_back(leader);
 }
 Team::~Team() {
-    for (Character* fighter : fighters) {
+    for (Character* fighter : getFighters()) {
         delete fighter;
     }
 }
@@ -24,21 +24,21 @@ void Team::add(Character* fighter) {
         throw runtime_error("ERROR: the fighter is a member in a different team.");
     }
 
-    for (Character* other : fighters) {
+    for (Character* other : getFighters()) {
         if (other == fighter) {
             throw runtime_error("ERROR: this fighter is already in the team.");
         }
     }
 
-    if (this->fighters.size() >= 10) {
+    if (getFighters().size() >= 10) {
         throw runtime_error("ERROR: the team already has 10 fighters.");
     }
 
-    if (fighters.size() < 10) {
+    if (getFighters().size() < 10) {
         if(Cowboy* cowboy = dynamic_cast<Cowboy*>(fighter)){
-            fighters.insert(fighters.begin(),fighter); //if its cowboy insert in the beginning of the vector
+            getFighters().insert(getFighters().begin(),fighter); //if its cowboy insert in the beginning of the vector
         }else{
-            fighters.push_back(fighter); //if its ninja insert in the end of the vector
+            getFighters().push_back(fighter); //if its ninja insert in the end of the vector
         }
     }
     fighter->setIsMember();
@@ -58,7 +58,7 @@ void Team::chose_leader() {
     double min_distance = numeric_limits<int>::max();
 
     // over all fighters
-    for (Character* other : fighters)
+    for (Character* other : getFighters())
     {
         if(other->isAlive()) //fighter is alive
         {
@@ -77,7 +77,7 @@ void Team::chose_leader() {
 Character* Team::chose_target(Team* enemyTeam){
     Character* target = nullptr;
     double closestDistance = numeric_limits<double>::max();
-    for (Character* enemy : enemyTeam->fighters) {
+    for (Character* enemy : enemyTeam->getFighters()) {
         if (enemy->isAlive()) {
             double distance = leader->distance(enemy);
             if (distance < closestDistance) {
@@ -123,7 +123,7 @@ void Team::attack(Team* enemyTeam) {
 }
 
 void Team::attack_target(Character *target, Team *enemyTeam) {
-    for (Character* fighter : this->fighters) {
+    for (Character* fighter : getFighters()) {
         if (fighter == NULL || target == NULL){ return;}
         if (fighter->isAlive() && target->isAlive()) { // all the lives fighters attack the target
             // ****first go over all the cowboys**** //
@@ -158,7 +158,7 @@ void Team::attack_target(Character *target, Team *enemyTeam) {
 
 int Team::stillAlive() {
     int count = 0;
-    for (Character* fighter : fighters) {
+    for (Character* fighter : getFighters()) {
         if (fighter->isAlive()) {
             count++;
         }
@@ -168,8 +168,18 @@ int Team::stillAlive() {
 
 void Team::print() {
     string result;
-    for (Character* fighter : fighters) {
+    for (Character* fighter : getFighters()) {
         result += fighter->print() + "\n";
     }
     cout << result <<endl;
+}
+
+// Getter function for fighters
+vector<Character*>& Team::getFighters() {
+    return this->fighters;
+}
+
+// Setter function for fighters
+void Team::setFighters(const vector<Character*>& newFighters) {
+    fighters = newFighters;
 }

@@ -6,14 +6,11 @@ Point::Point() : x_coor(0.0), y_coor(0.0) {}
 
 Point::Point(double x_coor, double y_coor): x_coor(x_coor), y_coor(y_coor){}
 
-Point::~Point() {}
-
 double Point::distance(const Point& other) const{
     double dx = getX() - other.getX();
     double dy = getY() - other.getY();
     return sqrt(dx*dx + dy*dy);
 }
-
 
 string Point::print() const{
     string msg = "";
